@@ -1,0 +1,10 @@
+Flask==2.0.3
+tensorflow==2.10.1
+tensorflow-hub==0.16.1
+tensorflow-text==2.10.0
+numpy==1.26.4
+speechrecognition==3.8.1
+pyaudio==0.2.11
+wave==0.0.2
+langdetect==1.0.9
+googletrans==4.0.0-rc1
