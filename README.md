@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Multilingual Offensive Detection Using BERT
 Project Overview
 Objective: Detects offensive content in text, images, and audio across multiple Indian languages.
@@ -71,3 +72,6 @@ Support more Indian languages for detection.
 Improve image and audio detection using advanced models.
 Integrate with social media platforms for real-time content moderation.
 Enhance user interface for better accessibility.
+=======
+# MultilingualOffenseDetection
+>>>>>>> f3c2ed5c2f852093d14e97b10c8153f235db4863
