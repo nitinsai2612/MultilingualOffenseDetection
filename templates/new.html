@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exact Card Design</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        /* General Body Styling */
+        body {
+            background: linear-gradient(135deg, #111111, #1e1e1e); /* Dark background */
+            color: #f0f0f0; /* Light grey text color */
+            font-family: 'Poppins', sans-serif;
+            padding-top: 80px;
+            margin: 0;
+            text-align: center;
+            overflow-x: hidden;
+            height: 100%;
+            min-height: 100vh;
+            transition: background 0.5s ease; /* Smooth transition for theme change */
+        }
+
+        /* Light Theme */
+        body.light {
+            background: linear-gradient(135deg, #ffffff, #ebedee); /* Light background */
+            color: #333333; /* Darker text color */
+        }
+
+        /* Header Styling */
+        h1 {
+            color: #ffffff; /* Light color for contrast */
+            margin-bottom: 40px;
+            font-weight: 900;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ff0075, #00d2ff); /* Neon accent gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1.light {
+            color: #2c3e50; /* Darker color for better visibility */
+    margin-bottom: 40px;
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #6dd5fa, #2c3e50); /* Stronger contrast gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Darker color for light theme */
+        }
+
+        h2, h5 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #ffffff; /* Strong contrast for readability */
+            margin-bottom: 30px;
+        }
+
+        h2.light, h5.light {
+            color: #34495e; /* Darker color for light theme */
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #141414; /* Dark navbar */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            transition: background 0.5s ease; /* Smooth transition for theme change */
+        }
+
+        .navbar.light {
+            background-color: #2c3e50;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            transition: background 0.5s ease; /* Smooth transition for theme change */
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00d2ff; /* Neon blue for brand */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .navbar-brand:hover {
+            color: #ff0075; /* Neon pink hover effect */
+            text-shadow: 0 0 10px rgba(255, 0, 117, 0.7);
+        }
+
+        .navbar-brand.light {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00d2ff; /* Neon blue for brand */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .navbar-brand.light:hover {
+            color: #70f1ff; /* Neon pink hover effect */
+            text-shadow: 0 0 10px rgba(63, 239, 255, 0.7);
+        }
+
+        .nav-link {
+            color: #ffffff;
+            font-size: 0.9rem;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-right: 25px;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link.light {
+            color: #ffffff; /* Light color for better visibility */
+        }
+
+        .nav-link:hover {
+            color: #ff0075; /* Neon pink hover effect */
+            text-shadow: 0 0 10px rgba(255, 0, 117, 0.7);
+        }
+
+        .nav-link.light:hover {
+            color: #84e8ff;
+            text-shadow: 0 0 10px rgb(132, 214, 255);
+        }
+
+        /* Toggle Switch Styling */
+        /* Toggle Switch Styling */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;  /* Adjust width */
+    height: 20px; /* Adjust height */
+    margin-top: 8px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px; /* Half of the height to make the edges round */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;  /* Adjust circle size */
+    width: 16px;   /* Adjust circle size */
+    left: 2px;     /* Adjust circle position */
+    bottom: 2px;   /* Adjust circle position */
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #00d2ff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px); /* Adjust translation according to the new size */
+}
+
+
+        /* Logout Button */
+        .logout-btn {
+            background-color: #222222;  /* Neon pink */
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding: 10px 40px;
+            border-radius: 5px; /* Rounded button */
+            box-shadow: 0 5px 20px rgba(255, 0, 117, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #ff9191;
+        }
+
+        .logout-btn.light {
+            background-color: #2c3e50; /* Neon pink */
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding: 10px 40px;
+            border-radius: 5px; /* Rounded button */
+            box-shadow: 0 5px 20px rgba(108, 144, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #74b6f9;
+        }
+
+        /* Card Styling */
+        .card, .form-container {
+            background-color: #1a1a1a; /* Dark card background */
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.077);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 40px;
+        }
+
+        .card.light, .form-container.light {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background-color: #ffffff; /* Light card */
+            border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+        }
+
+        .card:hover, .form-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Form Input Styling */
+        .form-control, .form-control-file, select, .custom-file-input input[type="file"] {
+            background-color: rgba(255, 255, 255, 0.1); /* Dark theme input */
+            border: 2px solid #00d2ff; /* Neon blue border */
+            padding: 8px;
+            border-radius: 15px;
+            color: #8e8e8e; /* Light grey text */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            width: 100%;
+            box-shadow: 0 0 5px rgba(0, 210, 255, 0.2); /* Subtle neon glow */
+        }
+
+        .form-control.light, .form-control-file.light, select.light, .custom-file-input input[type="file"].light {
+            background-color: #f0f4f8; /* Light grey input field */
+            border: 2px solid #6dd5fa; /* Light blue border */
+            color: #000000; /* Darker text for better readability */
+        }
+
+        .form-control:focus, select:focus, .custom-file-input input[type="file"]:focus {
+            border-color: #ff0075; /* Neon pink focus */
+            box-shadow: 0 0 10px rgba(255, 0, 117, 0.5); /* Pink glow on focus */
+        }
+
+        /* Button Styling */
+        .btn-primary, .btn-success, .btn-danger, .submit-btn {
+            background-color: #00d2ff; /* Neon blue buttons */
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 12px 35px;
+            border-radius: 50px; /* Rounded buttons */
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 210, 255, 0.4);
+            border: none;
+        }
+
+        .btn-primary:hover, .btn-success:hover, .btn-danger:hover, .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .col-md-4 {
+                margin-bottom: 20px;
+            }
+        }
+
+
+        /* OUR TEAM Section */
+.team-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.team-member {
+    background-color: #1a1a1a; /* Dark theme background */
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 40px;
+    color: #fff;
+    width: 400px;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.team-member img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid #00d2ff;
+    margin-bottom: 20px;
+}
+
+.team-member h3 {
+    font-size: 1.5em;
+    color: #ffffff; /* Dark theme text color */
+}
+
+.team-member p {
+    font-size: 1.1em;
+    color: #8e8e8e; /* Dark theme text color */
+    margin-bottom: 20px;
+}
+
+.social-icons a {
+    color: #00d2ff; /* Social icons default color */
+    margin: 0 10px;
+    font-size: 1.5em;
+}
+
+.social-icons a:hover {
+    color: #ff0075; /* Hover effect for social icons */
+}
+
+/* Light Theme for OUR TEAM Section */
+body.light .team-member {
+    background-color: #ffffff; /* Light theme background */
+    color: #333; /* Light theme text color */
+}
+
+body.light .team-member h3 {
+    color: #333333; /* Light theme heading color */
+}
+
+body.light .team-member p {
+    color: #666666; /* Light theme text color */
+}
+
+body.light .social-icons a {
+    color: #007bff; /* Light theme social icons */
+}
+
+body.light .social-icons a:hover {
+    color: #ff0075; /* Light theme hover effect */
+}
+
+
+
+
+
+
+/* Premium Footer Styling */
+.premium-footer {
+    background-color: #161616;
+    color: #ffffff;
+    padding: 50px 0;
+    text-align: center;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(120, 120, 120, 0.252);
+}
+
+.premium-footer .footer-section {
+    margin-bottom: 30px;
+}
+
+.premium-footer h3 {
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.premium-footer h3::after {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background-color: #ff0075; /* Gradient accent under header */
+    display: block;
+    margin: 10px auto;
+}
+
+.premium-footer p {
+    font-size: 1rem;
+    color: #cccccc;
+}
+
+.premium-footer .footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.premium-footer .footer-links li {
+    margin-bottom: 10px;
+}
+
+.premium-footer .footer-links a {
+    color: #00d2ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.premium-footer .footer-links a:hover {
+    color: #ff0075;
+    text-decoration: underline;
+}
+
+.premium-footer .footer-social-icons {
+    margin-top: 20px;
+}
+
+.premium-footer .footer-social-icons a {
+    font-size: 1.8rem;
+    margin: 0 15px;
+    display: inline-block;
+    color: #00d2ff;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.premium-footer .footer-social-icons a:hover {
+    color: #ff0075;
+    transform: scale(1.2); /* Grow the icon on hover */
+}
+
+.premium-footer .footer-bottom {
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+}
+
+.premium-footer .footer-bottom p {
+    font-size: 1rem;
+    color: #aaaaaa;
+}
+
+/* Light Theme for Premium Footer */
+body.light .premium-footer {
+    background-color: #f9f9f9; /* Light footer background */
+    color: #333333;
+}
+
+body.light .premium-footer h3 {
+    color: #333333;
+}
+
+body.light .premium-footer h3::after {
+    background-color: #007bff; /* Light theme accent */
+}
+
+body.light .premium-footer p {
+    color: #666666;
+}
+
+body.light .premium-footer .footer-links a {
+    color: #007bff;
+}
+
+body.light .premium-footer .footer-links a:hover {
+    color: #ff0075;
+}
+
+body.light .premium-footer .footer-social-icons a {
+    color: #007bff;
+}
+
+body.light .premium-footer .footer-social-icons a:hover {
+    color: #ff0075;
+}
+
+body.light .premium-footer .footer-bottom p {
+    color: #888888;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Multilingual Offensive</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/new">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link logout-btn" href="/logout">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <!-- Toggle Switch -->
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container">
+        <br>
+        <h1>Multilingual Offensive Detection</h1>
+        <div class="row">
+            <!-- Analyze Text Section -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Text Input</h5>
+                        <form action="/analyze_input1" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="input_text" placeholder="Enter text here" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Analyze Text</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analyze Audio Section -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Upload Audio</h5>
+                        <form action="/analyze_input2" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input type="file" class="form-control-file" name="audio_file" accept="audio/*" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Analyze Audio</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Translate Text Section -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Translate Text</h5>
+                        <form action="/translate" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="input_text" placeholder="Enter text to translate" required>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" name="language" required>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                    <option value="en">English</option>
+                                    <option value="te">Telugu</option>
+                                    <option value="zh-cn">Chinese (Simplified)</option>
+                                    <option value="ja">Japanese</option>
+                                    <option value="hi">Hindi</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Translate</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meme Upload Section -->
+        <div class="form-container" id="meme_upload_container">
+            <h2>Upload Meme Image</h2>
+            <form action="/upload_meme" method="POST" enctype="multipart/form-data">
+                <div class="file-input-container">
+                    <input type="file" class="form-control-file" name="meme_image" accept="image/*" required>
+                </div>
+                <input class="submit-btn" type="submit" value="Upload Meme">
+            </form>
+        </div>
+
+        <!-- Live Audio Sentiment Analysis Section -->
+        <div class="card mt-4">
+            <div class="card-body text-center">
+                <h5 class="card-title">Live Audio Offensive Detection</h5>
+                <form action="/start" method="GET">
+                    <button type="submit" class="submit-btn">Start Recording</button>
+                </form>
+                <form action="/stop" method="GET" class="mt-2">
+                    <button type="submit" class="submit-btn">Stop Recording</button>
+                </form>
+                <form action="/analyse_live" method="GET" class="mt-2">
+                    <button type="submit" class="submit-btn">Analyze Recorded Audio</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- OUR TEAM Section -->
+<h2>OUR TEAM</h2>
+<div class="team-container">
+    <div class="team-member">
+        <img src="https://i.imghippo.com/files/QojrK1727890916.jpg" alt="Luna Turner">
+        <h3>Nalluri Manisha</h3>
+        <p>21761A5432</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+    <div class="team-member">
+        <img src="https://res.cloudinary.com/drnxwj379/image/upload/v1668697028/1668686242141-01_e6jxkn.jpg" alt="Bryant Hall">
+        <h3>Shaik Mohammad Kaif</h3>
+        <p>21761A5452</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+    <div class="team-member">
+        <img src="https://i.imghippo.com/files/2cIZp1727890944.jpg" alt="Hope Watkins">
+        <h3>Yaligeti Sai Teja</h3>
+        <p>21761A5465</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- Footer Section -->
+<!-- Premium Footer Section -->
+<footer class="premium-footer">
+    <div class="container">
+        <div class="row">
+            <!-- About Us Section -->
+            <div class="col-lg-4 col-md-6 col-sm-12 footer-section">
+                <h3>About Us</h3>
+                <p>We build intelligent, innovative tools and AI solutions that enhance daily interactions and improve overall digital experiences.</p>
+            </div>
+            <!-- Quick Links Section -->
+            <div class="col-lg-4 col-md-6 col-sm-12 footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- Social Media Section -->
+            <div class="col-lg-4 col-md-6 col-sm-12 footer-section">
+                <h3>Follow Us</h3>
+                <div class="footer-social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Website. Crafted with care.</p>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Theme toggle functionality
+        document.getElementById('theme-toggle').addEventListener('change', function() {
+            document.body.classList.toggle('light');
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('light');
+            const logoutBtn = document.querySelector('.logout-btn');
+            logoutBtn.classList.toggle('light');
+            const cards = document.querySelectorAll('.card, .form-container');
+            cards.forEach(card => {
+                card.classList.toggle('light');
+            });
+            const titleElements = document.querySelectorAll('h1, h2, h5');
+            titleElements.forEach(title => {
+                title.classList.toggle('light');
+            });
+        });
+    </script>
+</body>
+</html>

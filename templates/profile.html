@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile UI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            padding: 50px 0;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative; /* Added for positioning the toggle */
+        }
+
+        .toggle-container {
+            position: absolute; /* Fixed position */
+            top: 20px; /* Distance from the top */
+            right: 20px; /* Distance from the right */
+            display: flex;
+            align-items: center;
+            z-index: 1000; /* Ensure it's above other elements */
+        }
+
+        .toggle {
+            display: none;
+        }
+
+        .toggle-label {
+            width: 60px;
+            height: 30px;
+            background: #ccc;
+            border-radius: 30px;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            transition: background 0.3s;
+            margin-left: 10px; /* Spacing between links and toggle */
+        }
+
+        .toggle-label:before {
+            content: '';
+            width: 25px;
+            height: 25px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle:checked + .toggle-label {
+            background: #66bb6a;
+        }
+
+        .toggle:checked + .toggle-label:before {
+            transform: translateX(30px);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 55px;
+            border-radius: 20px;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s;
+        }
+
+        .profile-card {
+            background-color: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            max-width: 350px;
+        }
+
+        .profile-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .profile-card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .profile-card p {
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .profile-card .contact-info {
+            margin-top: 15px;
+        }
+
+        .profile-card .contact-info p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .right-section {
+            max-width: 550px;
+        }
+
+        .right-section h2 {
+            font-size: 2rem;
+            color: #ff6f47;
+            margin-bottom: 20px;
+        }
+
+        .right-section h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .right-section p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .right-section .btn-download {
+            background-color: #ff6f47;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .right-section .btn-download:hover {
+            background-color: #e65b36;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: #ff6f47;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #e65b36;
+        }
+
+        /* Dark Theme Styles */
+        body.dark {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .container.dark {
+            background-color: #1e1e1e;
+        }
+
+        .profile-card.dark {
+            background-color: #292929;
+        }
+
+        .profile-card.dark p {
+            color: #d1d1d1;
+        }
+
+        .right-section.dark h2 {
+            color: #ff6f47;
+        }
+
+        .right-section.dark p {
+            color: #b0b0b0;
+        }
+
+        .right-section .btn-download.dark {
+            background-color: #ff6f47;
+        }
+
+        .right-section .btn-download.dark:hover {
+            background-color: #e65b36;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="toggle-container">
+        <input type="checkbox" id="theme-toggle" class="toggle">
+        <label for="theme-toggle" class="toggle-label"></label>
+    </div>
+
+    <div class="container">
+        <!-- Left Side: Profile Card -->
+        <div class="profile-card">
+            <img src="https://res.cloudinary.com/drnxwj379/image/upload/v1668697028/1668686242141-01_e6jxkn.jpg" alt="Profile Picture">
+            <h2>{{ user.username }}</h2>
+            <p>{{ user.role }}</p>
+            <div class="contact-info">
+                <p>📞 {{ user.phone }}</p>
+                <p>✉️ {{ user.email }}</p>
+                <p>🏡 {{ user.address }}</p>
+            </div>
+        </div>
+
+        <!-- Right Side: Details and Actions -->
+        <div class="right-section">
+            <h2>HELLO I'M</h2>
+            <h1>{{ user.username }}</h1>
+            <p>There are many variations of sum available in the galley of type and scrambled it some.</p>
+
+            <div class="social-icons">
+                <span>Follow Me: </span>
+                <a href="https://www.facebook.com/profile.php?id=100021530809613"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/home"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/me_kaif_18/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/shaik-mohammad-kaif-ba0366243/"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+
+        themeToggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark', themeToggle.checked);
+            document.querySelector('.container').classList.toggle('dark', themeToggle.checked);
+            document.querySelector('.profile-card').classList.toggle('dark', themeToggle.checked);
+            document.querySelector('.right-section').classList.toggle('dark', themeToggle.checked);
+        });
+    </script>
+
+</body>
+</html>

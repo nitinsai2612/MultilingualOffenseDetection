@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f5;
+        }
+
+        .signup-container {
+            width: 900px;
+            height: auto; /* Adjusted height to auto */
+            background: linear-gradient(90deg, #ffffff 50%, #00c9ff 50%);
+            border-radius: 20px;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Left Section (Form) */
+        .form-section {
+            width: 50%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #ffffff;
+        }
+
+        .form-section h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .form-section input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 50px;
+            border: 1px solid #ccc;
+            outline: none;
+            font-size: 1rem;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section input:focus {
+            border-color: #00c9ff;
+        }
+
+        .form-section .terms {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .form-section .terms input {
+            margin-right: 10px;
+        }
+
+        .form-section .terms a {
+            color: #00c9ff;
+            text-decoration: none;
+        }
+
+        .form-section .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .form-section .btn-primary {
+            background-color: #00c9ff;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 5px 15px rgba(0, 201, 255, 0.4);
+        }
+
+        .form-section .btn-primary:hover {
+            background-color: #00a7d1;
+        }
+
+        .form-section .signin {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .form-section .signin a {
+            color: #00c9ff;
+            text-decoration: none;
+        }
+
+        .form-section .signin a:hover {
+            text-decoration: underline;
+        }
+
+        /* Right Section (Message) */
+        .message-section {
+            width: 50%;
+            padding: 50px;
+            background-color: #00c9ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+
+        .message-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .message-section p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .signup-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .form-section, .message-section {
+                width: 100%;
+                padding: 30px;
+            }
+
+            .message-section {
+                background: linear-gradient(90deg, #00c9ff 100%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <!-- Left Side: Form Section -->
+        <div class="form-section">
+            <h2>Hello, friend!</h2>
+            <form action="/signup" method="POST" enctype="multipart/form-data"> <!-- Added enctype for file upload -->
+                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required>
+                <input type="text" class="form-control" name="phone" placeholder="Phone Number" required>
+               <input type="email" class="form-control" name="email" placeholder="Email" required>
+               <input type="text" class="form-control" name="address" placeholder="address" required>
+                <button type="submit" class="btn-primary">Create Account</button>
+            </form>
+            <div class="signin">
+                Already have an account? <a href="/login">Sign in</a>
+            </div>
+        </div>
+
+        <!-- Right Side: Message Section -->
+        <div class="message-section">
+            <h2>Glad to see you!</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </div>
+
+</body>
+</html>
